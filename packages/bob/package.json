@@ -1,0 +1,92 @@
+{
+	"name": "@camenae/bob",
+	"version": "0.5.0",
+	"license": "MIT",
+	"description": "Native IBM Bob SDK with private ACP transport and MCP permission gates",
+	"type": "module",
+	"main": "./dist/sdk/index.mjs",
+	"types": "./dist/sdk/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/sdk/index.d.ts",
+			"import": "./dist/sdk/index.mjs"
+		},
+		"./package.json": "./package.json",
+		"./mcp": {
+			"types": "./dist/sdk/mcp-gate.d.ts",
+			"import": "./dist/sdk/mcp-gate.mjs"
+		}
+	},
+	"files": [
+		"dist",
+		"runtime/bob",
+		"runtime/compatibility.json",
+		"examples",
+		"README.md",
+		"MCP.md",
+		"BOB-ACP-CORRECTION.md",
+		"BOB-USAGE-CORRECTION.md",
+		"COMPATIBILITY.md",
+		"THIRD_PARTY.md",
+		"LICENSE",
+		"SDK.md"
+	],
+	"scripts": {
+		"lint": "bun ../../node_modules/oxlint/bin/oxlint .",
+		"test": "bun --bun ../../node_modules/vitest/vitest.mjs run",
+		"test:node": "node ../../node_modules/vitest/vitest.mjs run",
+		"typecheck": "bun ../../node_modules/typescript/bin/tsc -p tsconfig.json --noEmit",
+		"build": "bun esbuild.config.mjs",
+		"runtime:prepare": "bun scripts/prepare-runtime.mjs",
+		"smoke:runtime": "bun tests/smoke/fixtures/package-runtime-consumer.mjs",
+		"smoke:runtime:live": "BOB_GATEWAY_LIVE_SMOKE=1 bun tests/smoke/fixtures/package-runtime-consumer.mjs",
+		"smoke:server:live": "bun tests/smoke/package-server.mjs",
+		"prepack": "bun run build",
+		"release": "bun scripts/release.mjs",
+		"smoke:package": "bun tests/smoke/package-install.mjs",
+		"smoke:package:node": "node tests/smoke/package-install.mjs",
+		"smoke:package:live": "BOB_GATEWAY_LIVE_SMOKE=1 bun tests/smoke/package-install.mjs",
+		"smoke:approval:live": "bun tests/smoke/package-live.mjs approval",
+		"smoke:mcp:live": "bun tests/smoke/package-live.mjs managed-mcp",
+		"smoke:mcp:approval": "bun tests/smoke/fixtures/mcp-approval-consumer.mjs",
+		"smoke:usage": "bun tests/smoke/fixtures/usage-consumer.mjs",
+		"smoke:mcp:approval:live": "bun tests/smoke/package-live.mjs mcp-approval",
+		"smoke:runtime:modes:live": "bun tests/smoke/sdk-modes.mjs"
+	},
+	"dependencies": {
+		"@agentclientprotocol/sdk": "1.4.0",
+		"@lydell/node-pty": "1.1.0",
+		"@modelcontextprotocol/client": "2.2.0",
+		"@modelcontextprotocol/core": "2.2.0",
+		"@modelcontextprotocol/node": "2.1.0",
+		"@modelcontextprotocol/server": "2.2.0",
+		"@officecli/officecli": "1.0.144",
+		"@vscode/ripgrep": "1.18.0"
+	},
+	"allowScripts": {
+		"@officecli/officecli@1.0.144": true
+	},
+	"trustedDependencies": [
+		"@officecli/officecli",
+		"esbuild"
+	],
+	"devDependencies": {
+		"@modelcontextprotocol/sdk": "1.29.0",
+		"@oxlint/plugins": "1.79.0",
+		"@types/node": "^22.0.0",
+		"esbuild": "0.28.2",
+		"oxlint": "1.79.0",
+		"typescript": "^5.9.3",
+		"vitest": "^4.1.8"
+	},
+	"engines": {
+		"node": ">=22.15.0"
+	},
+	"keywords": [
+		"bob",
+		"harness",
+		"acp",
+		"sdk",
+		"mcp"
+	]
+}

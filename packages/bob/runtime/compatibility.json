@@ -1,0 +1,31 @@
+{
+  "nodeMinimum": "22.15.0",
+  "bob": {
+    "version": "2.0.5",
+    "commit": "2dc180906",
+    "releaseCommit": "2dc1809063bd2c2b550e66b5c20854f3cf8cb9f4",
+    "archiveSha256": "eff232eb1b69f34f984ddd295e6960470058ca922b1c751879c5a8d06199f566",
+    "entrypointSha256": "15c328ca5f6b9360d3c7a72e6bd46ae0ce9082eda20f57edc5da0348efac1cbe",
+    "correction": {
+      "id": "acp-mcp-always-allow-v1",
+      "entrypointSha256": "d443d6e7e0351c45fc2191d63787835c96d15eace7a9bad0a6d795985295da8c"
+    },
+    "usageCorrection": {
+      "id": "acp-session-usage-v1",
+      "entrypointSha256": "17eb21f1e836179d0fac0010ac65b488ea33f9ab552f59fa282c2dc819f46a75"
+    }
+  },
+  "dependencies": {
+    "@lydell/node-pty": "1.1.0",
+    "@vscode/ripgrep": "1.18.0",
+    "@officecli/officecli": "1.0.144"
+  },
+  "officecliSha256": {
+    "darwin-arm64": "04757163428c5bde8d91e8f838517818e74722157722ca5f3877b6716b77bd45",
+    "darwin-x64": "366100643d757b0da24829422897ca74768a894b5ecd1a471a1336f8e2a0787d",
+    "linux-arm64": "56ec2c3114b66f6490888b6778cbb8413a65911a26cacc7207f29e13424966da",
+    "linux-x64": "32ef7a21a54a4ca6c9806bf5e9f3d32bfb1291017329c55044cb2aac71822eb8",
+    "linux-musl-arm64": "42f3923dbd7b4e4807f83e1ef36f3f281a54e000127218cd7cb7d68133cee767",
+    "linux-musl-x64": "87cdd4318da5eb0cd3ba24413e05f6517a0fe9c06e27ebdf63819e583ccc4f2d"
+  }
+}

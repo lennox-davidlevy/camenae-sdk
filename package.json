@@ -1,0 +1,18 @@
+{
+  "name": "camenae-sdk",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "bun@1.4.2",
+  "workspaces": ["packages/*"],
+  "trustedDependencies": ["@officecli/officecli", "esbuild"],
+  "scripts": {
+    "lint": "bun run --filter @camenae/bob lint",
+    "typecheck": "bun run --filter @camenae/bob typecheck",
+    "test": "bun run --filter @camenae/bob test",
+    "test:node": "bun run --filter @camenae/bob test:node",
+    "build": "bun run --filter @camenae/bob build",
+    "smoke:package": "bun run --filter @camenae/bob smoke:package",
+    "smoke:package:node": "bun run --filter @camenae/bob smoke:package:node"
+  }
+}

@@ -1,0 +1,3 @@
+[install]
+# Private Bob resolves pinned native helper packages from the package tree.
+linker = "hoisted"
