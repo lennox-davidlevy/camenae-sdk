@@ -1,5 +1,19 @@
 # Development
 
+## OpenCode integration
+
+`packages/opencode` pins OpenCode 2.0.23. Its native lifecycle test uses a local
+synthetic model endpoint, separate HOME/XDG directories and an owned subprocess;
+it needs no credentials or paid inference. Run `bun run --filter @camenae/opencode test`.
+Node worker checks require Node 24: upstream emits syntax Node 22 cannot parse.
+Bob's own Node minimum is unchanged. The root test/build commands include both
+packages; preparing Bob's private runtime remains necessary for Bob native tests.
+
+Install OpenCode workers in a separate dependency root when the consuming app
+uses a different Effect RC. Pin `effect` and `@effect/platform-node-shared` to
+`4.0.0-rc.112` in that root, including in archive acceptance. See the integration
+README for lifecycle and authorization limitations.
+
 ## Requirements
 
 - Bun 1.4.2 (the tested repository toolchain).

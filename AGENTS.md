@@ -3,10 +3,15 @@
 ## Scope and ownership
 
 Camenae SDK contains independently consumable agent-harness integrations in a
-private Bun workspace. Bob is the only implemented integration: `packages/bob/`,
+private Bun workspace. Bob is the established integration: `packages/bob/`,
 exports `@camenae/bob` and `@camenae/bob/mcp`, entry point `Bob` and `Bob*` types.
 Package manifests own product versions; the root owns shared commands and
 `bun.lock`. Bob also retains `package-lock.json` for npm archive tooling.
+
+`packages/opencode/` is an experimental OpenCode 2.0.23 integration with an
+official native HTTP worker. Its README owns its boundaries. Keep its Effect
+runtime isolated from consumers using other RCs. Node 22 remains supported for
+Bob; OpenCode's native worker requires Bun 1.4.2 or Node 24.
 
 Do not create empty integrations, speculative shared cores, or a mandatory common
 API. Extract common contracts only from demonstrated needs across implemented

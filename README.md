@@ -11,9 +11,11 @@ harness rather than hiding them behind a lowest-common-denominator API.
 | Harness | Package | Status |
 | --- | --- | --- |
 | IBM Bob | [`@camenae/bob`](packages/bob/README.md) | Available as a local package archive |
+| OpenCode V2 | [`@camenae/opencode`](packages/opencode/README.md) | Experimental isolated-worker integration; local archives |
 
-Bob is the first integration. There is no shared harness API or additional
-implemented integration yet. See the [design principles](docs/design.md).
+There is no mandatory shared harness API. The experimental OpenCode adapter keeps
+native events and session identifiers, rather than translating them to Bob's ACP.
+See the [design principles](docs/design.md).
 
 ## Quick start
 

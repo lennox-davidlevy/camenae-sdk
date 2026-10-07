@@ -28,6 +28,11 @@ the legal notices emitted by the bundler. Native node-pty, ripgrep and OfficeCLI
 packages are installed dependencies with their own licenses. Preserve those
 notices when redistributing the SDK and its runtime.
 
+The optional Code Mode bundle includes `@opencode/codemode` 2.0.23 and Acorn under
+the MIT license, and Effect 4.0.0-rc.112 under the MIT license. Their original
+license texts ship in `dist/licenses/`. The interpreter is reused independently
+of the OpenCode server and does not alter IBM Bob's license or runtime.
+
 ## Development tooling
 
 The source repository also vendors anti-slop lint rules under

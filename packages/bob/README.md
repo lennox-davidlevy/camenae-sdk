@@ -3,6 +3,9 @@
 IBM Bob integration for Camenae SDK. Run native Bob 2.0.5 from Bun or Node.js,
 using the package's verified private runtime and official ACP client.
 
+Optional [Code Mode](CODE_MODE.md) lets Bob compose application-supplied tools
+through a private MCP server. It does not change Bob's native tools or ACP.
+
 ## Use
 
 Install a verified package archive into your application, then:
