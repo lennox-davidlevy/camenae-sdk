@@ -1,5 +1,9 @@
 # Exact MCP tool authorization
 
+For restricted scripts that compose application-supplied tools, see the separate
+[Bob Code Mode](CODE_MODE.md) entrypoint. This gate continues to authorize ordinary
+MCP calls and does not interpret scripts or authorize their nested operations.
+
 The gate uses stable MCP client/server/core 2.2.0 and Node adapter 2.1.0, including
 the upstream request-ID-zero cancellation fix. The SDK build applies a narrowly
 reviewed, version/hash-checked correction for an upstream SSE bookkeeping leak;

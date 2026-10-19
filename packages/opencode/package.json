@@ -1,0 +1,27 @@
+{
+  "name": "@camenae/opencode",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "Owned OpenCode V2 integration for Camenae workers",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./worker": { "types": "./dist/worker.d.ts", "import": "./dist/worker.js" }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "lint": "bun ../../node_modules/oxlint/bin/oxlint -c oxlint.config.ts .",
+    "typecheck": "bun ../../node_modules/typescript/bin/tsc --noEmit",
+    "build": "bun ../../node_modules/typescript/bin/tsc",
+    "test": "bun run build && bun --bun ../../node_modules/vitest/vitest.mjs run",
+    "test:node": "node ../../node_modules/vitest/vitest.mjs run",
+    "prepack": "bun run build"
+  },
+  "dependencies": {
+    "@opencode/client": "2.0.23",
+    "@opencode/sdk": "2.0.23",
+    "@opencode/server": "2.0.23",
+    "effect": "4.0.0-rc.112"
+  },
+  "engines": { "node": ">=24.0.0", "bun": ">=1.4.2" }
+}

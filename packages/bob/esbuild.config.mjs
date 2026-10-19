@@ -38,9 +38,17 @@ await buildBundle();
 
 buildDeclarations();
 
+mkdirSync("dist/licenses", { recursive: true });
+
+copyFileSync("licenses/opencode-MIT.txt", "dist/licenses/opencode-MIT.txt");
+
+for (const dependency of ["effect", "acorn"]) {
+	copyFileSync(join(dirname(require.resolve(`${dependency}/package.json`)), "LICENSE"), `dist/licenses/${dependency}-LICENSE`);
+}
+
 async function buildBundle() {
 	const result = await esbuild.build({
-		entryPoints: ["src/sdk/index.ts", "src/sdk/mcp-gate.ts"],
+		entryPoints: ["src/sdk/index.ts", "src/sdk/mcp-gate.ts", "src/sdk/code-mode.ts"],
 		bundle: true,
 		format: "esm",
 		metafile: true,
@@ -88,7 +96,7 @@ function buildDeclarations() {
 	], { stdio: "inherit" });
 	mkdirSync("dist/sdk", { recursive: true });
 
-	for (const name of ["index.d.ts", "bob.d.ts", "errors.d.ts", "types.d.ts", "mcp-gate.d.ts"]) {
+	for (const name of ["index.d.ts", "bob.d.ts", "errors.d.ts", "types.d.ts", "mcp-gate.d.ts", "code-mode.d.ts"]) {
 		copyFileSync(`${temporaryOutput}/sdk/${name}`, `dist/sdk/${name}`);
 	}
 

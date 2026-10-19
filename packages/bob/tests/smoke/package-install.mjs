@@ -71,6 +71,10 @@ try {
   writeFileSync(join(project, "sdk-consumer.ts"), `
     import { Bob, BobError, type BobRunResult, type BobCredential, type BobClient, type BobPermissionAutoDecisionEvent, type BobManagedMcpServer, type BobSessionUsage, type BobCustomMode, type BobStartOptions, type BobServeOptions } from "@camenae/bob";
     import { createMcpToolGate, type McpToolPolicy, type McpToolAutoDecisionEvent } from "@camenae/bob/mcp";
+    import { createBobCodeMode, type BobCodeModeOptions } from "@camenae/bob/code-mode";
+    const codeMode: BobCodeModeOptions = { tools: [], authorize: async () => "deny" };
+    const configureCodeMode = () => createBobCodeMode(codeMode);
+    void configureCodeMode;
     const mcpPolicy: McpToolPolicy = { tools: { write_document: "ask" }, fallback: "deny" };
     const server: BobManagedMcpServer = { name: "documents", type: "http", url: "http://127.0.0.1:1/mcp", headers: [], alwaysAllow: ["write_document"] };
     const mcpObserver = (event: McpToolAutoDecisionEvent) => {
@@ -120,6 +124,19 @@ try {
     timeout: 120_000,
   });
   const mcpEntrypoint = execFileSync(process.execPath, ["--input-type=module", "-e", 'console.log(import.meta.resolve("@camenae/bob/mcp"))'], { cwd: project, encoding: "utf8" }).trim();
+  const codeModeEntrypoint = execFileSync(process.execPath, ["--input-type=module", "-e", 'console.log(import.meta.resolve("@camenae/bob/code-mode"))'], { cwd: project, encoding: "utf8" }).trim();
+  execFileSync(process.execPath, ["--input-type=module", "-e", `
+    import { createBobCodeMode } from ${JSON.stringify(codeModeEntrypoint)};
+    const { verifyCodeMode } = await import(${JSON.stringify(new URL("./fixtures/code-mode-consumer.mjs", import.meta.url).href)});
+    await verifyCodeMode(createBobCodeMode);
+  `], { cwd: project, stdio: "inherit", timeout: 30_000 });
+  execFileSync(process.execPath, [join(packageDir, "tests/smoke/fixtures/code-mode-native.mjs")], {
+    cwd: project,
+    env: { ...installEnvironment, BOBSHELL_API_KEY: undefined,
+      BOB_GATEWAY_TEST_PACKAGE: join(project, "node_modules/@camenae/bob/dist/sdk/index.mjs"),
+      BOB_GATEWAY_TEST_CODE_MODE_PACKAGE: fileURLToPath(codeModeEntrypoint) },
+    stdio: "inherit", timeout: 120_000,
+  });
   execFileSync(process.execPath, ["--input-type=module", "-e", `
     import assert from "node:assert/strict";
     import { BobError } from "@camenae/bob";
